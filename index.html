@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mata Optika Lab — Sistem Penglihatan Interaktif</title>
+<style>
+:root{--navy:#102b46;--blue:#1677b8;--cyan:#8ed8ff;--paper:#f4f8fc;--ink:#172b3d;--muted:#5d7082;--line:#d6e2ec;--green:#16845b;--gold:#f0b44d}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(120deg,#102b46,#165d89);color:white;padding:34px 20px 28px}header .wrap,main{max-width:1080px;margin:auto}header .eyebrow{letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);font-size:.78rem;font-weight:800}h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;margin:.5rem 0}header p{max-width:720px;color:#e1eef7;margin-bottom:0}.pill{display:inline-block;border:1px solid #b9def2;border-radius:99px;padding:4px 10px;font-size:.78rem;margin:5px 5px 0 0}
+nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3;padding:9px 14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}nav a{color:var(--navy);text-decoration:none;font-size:.9rem;font-weight:700;padding:6px 10px;border-radius:8px}nav a:hover{background:#e8f4fc}
+main{padding:22px 16px 48px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 6px 22px #183a5510}.span12{grid-column:span 12}.span7{grid-column:span 7}.span5{grid-column:span 5}.span6{grid-column:span 6}h2{color:var(--navy);font-size:1.45rem;margin:0 0 10px}h3{margin:0 0 8px;color:var(--navy)}.muted{color:var(--muted)}.eyebrow2{color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem}
+.anatomy{display:grid;grid-template-columns:1fr 1fr;gap:12px}.part{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff}.part b{color:var(--blue)}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:14px}.step{background:#e9f5fd;color:#124d75;padding:8px 10px;border-radius:10px;font-weight:700;font-size:.9rem}.arrow{color:var(--blue);font-weight:900}
+label{font-weight:700;display:block;margin:14px 0 5px}input[type=range],select{width:100%;accent-color:var(--blue)}select,button{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}button{background:var(--blue);color:white;border:0;font-weight:750;cursor:pointer}button.secondary{background:#e8f4fc;color:var(--navy);border:1px solid #c4e1f4}.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.value{font-weight:800;color:var(--blue);float:right}.sim{background:#f7fbff;border:1px solid var(--line);border-radius:14px;padding:8px}.sim svg{width:100%;height:auto;display:block}.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.metric{background:#eef7fd;border-radius:12px;padding:12px}.metric small{display:block;color:var(--muted)}.metric strong{font-size:1.2rem;color:var(--navy)}.note{border-left:4px solid var(--gold);background:#fff8e8;padding:12px 14px;border-radius:8px;margin-top:12px}.success{border-left-color:var(--green);background:#effaf5}.disease-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.disease{border:1px solid var(--line);border-radius:12px;padding:14px}.disease .tag{font-size:.75rem;font-weight:800;color:var(--blue)}.quiz-q{padding:14px;border:1px solid var(--line);border-radius:12px;margin:12px 0}.quiz-q p{font-weight:750;margin:0 0 8px}.quiz-q label{font-weight:500;margin:7px 0}.result{font-weight:800;margin-top:10px}.refs li{margin:9px 0;overflow-wrap:anywhere}footer{background:var(--navy);color:#dcecf7;padding:20px;text-align:center}code{background:#eef3f7;padding:2px 5px;border-radius:5px}
+@media(max-width:760px){.span7,.span5,.span6{grid-column:span 12}.controls,.anatomy,.disease-grid{grid-template-columns:1fr}.readout{grid-template-columns:1fr 1fr}.card{padding:16px}nav{position:static}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="eyebrow">Biologi × Fisika • Media Pembelajaran Digital</div>
+<h1>MATA OPTIKA LAB</h1>
+<p>Jelajahi bagaimana mata menangkap cahaya, memfokuskan bayangan pada retina, berakomodasi, dan mengoreksi kelainan refraksi. Ubah parameter simulasi, amati diagram, lalu uji pemahamanmu.</p>
+<span class="pill">Simulasi konsep</span><span class="pill">Diagram sinar</span><span class="pill">Kuis interaktif</span>
+<div style="margin-top:18px;padding:12px 14px;border:1px solid #6da5c8;border-radius:12px;background:#ffffff12">
+<strong>Disusun oleh:</strong><br>
+Siti Aisyah Ayuwistira<br>
+Muhammad Fauzan Azhar Nasution<br>
+Aprilia Dwi Lestari
+</div>
+</div></header>
+<nav><a href="#anatomi">Anatomi</a><a href="#simulasi">Simulasi optika</a><a href="#akomodasi">Akomodasi</a><a href="#kelainan">Kelainan refraksi</a><a href="#kuis">Kuis</a><a href="#referensi">Referensi</a></nav>
+<main>
+<div class="grid">
+<section class="card span12" id="anatomi">
+<div class="eyebrow2">01 • Kenali mata</div><h2>Bagian mata dan fungsinya</h2>
+<p>Mata mengubah cahaya dari lingkungan menjadi sinyal saraf. Kornea dan lensa membiaskan cahaya; retina mengubah rangsangan cahaya menjadi sinyal listrik yang diproses lebih lanjut oleh sistem saraf dan otak.</p>
+<div class="anatomy">
+<div class="part"><b>Kornea</b><br>Lapisan bening di bagian depan; memberi sebagian besar daya pembiasan mata.</div>
+<div class="part"><b>Iris dan pupil</b><br>Iris mengatur diameter pupil; pupil adalah bukaan tempat cahaya masuk.</div>
+<div class="part"><b>Lensa kristalin</b><br>Mengubah kelengkungan untuk menyesuaikan fokus saat melihat dekat atau jauh.</div>
+<div class="part"><b>Otot siliaris dan zonula</b><br>Mengubah tegangan pada lensa sehingga bentuk dan daya optiknya berubah.</div>
+<div class="part"><b>Retina dan fovea</b><br>Retina berisi fotoreseptor; fovea memiliki ketajaman penglihatan paling tinggi.</div>
+<div class="part"><b>Saraf optik</b><br>Membawa informasi visual dari retina ke otak. Otak menafsirkan sinyal tersebut.</div>
+<div class="part"><b>Cairan aqueous dan vitreous</b><br>Media transparan yang membantu cahaya melewati bagian dalam mata serta menjaga bentuk mata.</div>
+<div class="part"><b>Sklera dan koroid</b><br>Sklera melindungi dan mempertahankan bentuk; koroid kaya pembuluh darah dan menyerap cahaya terserak.</div>
+</div>
+<div class="flow"><span class="step">Cahaya dari objek</span><span class="arrow">→</span><span class="step">Kornea</span><span class="arrow">→</span><span class="step">Pupil</span><span class="arrow">→</span><span class="step">Lensa</span><span class="arrow">→</span><span class="step">Retina</span><span class="arrow">→</span><span class="step">Saraf optik → otak</span></div>
+</section>
+<section class="card span7" id="simulasi">
+<div class="eyebrow2">02 • Laboratorium virtual</div><h2>Simulasi pembentukan bayangan</h2>
+<p class="muted">Geser jarak objek dan daya optik model mata. Diagram ini bersifat skematis; bukan ukuran anatomi sebenarnya atau alat diagnosis.</p>
+<div class="controls">
+<div><label for="distance">Jarak objek <span class="value" id="distanceValue">100 cm</span></label><input id="distance" type="range" min="25" max="400" step="5" value="100"></div>
+<div><label for="power">Daya optik ekuivalen <span class="value" id="powerValue">+60 D</span></label><input id="power" type="range" min="52" max="75" step="0.5" value="60"></div>
+</div>
+<div class="sim"><svg id="raySvg" viewBox="0 0 700 260" role="img" aria-label="Diagram sinar cahaya menuju mata dan retina">
+<defs><marker id="arrowhead" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1677b8"/></marker></defs>
+<rect x="20" y="22" width="660" height="216" rx="12" fill="#fff"/>
+<line x1="30" y1="130" x2="665" y2="130" stroke="#9fb1bf" stroke-dasharray="5 5"/>
+<path d="M410 56 Q450 130 410 204 Q370 130 410 56Z" fill="#a8def7" stroke="#1677b8" stroke-width="2"/>
+<path d="M515 55 Q545 130 515 205" fill="none" stroke="#16845b" stroke-width="5"/>
+<text x="390" y="42" font-size="13" fill="#124d75">Lensa</text><text x="526" y="42" font-size="13" fill="#16845b">Retina</text>
+<path id="ray1" d="M75 72 L410 72 L515 130" fill="none" stroke="#1677b8" stroke-width="3" marker-end="url(#arrowhead)"/>
+<path id="ray2" d="M75 188 L410 188 L515 130" fill="none" stroke="#1677b8" stroke-width="3" marker-end="url(#arrowhead)"/>
+<path id="ray3" d="M75 130 L410 130 L515 130" fill="none" stroke="#e2a12b" stroke-width="2" stroke-dasharray="5 4"/>
+<path d="M75 85 L75 175 M66 95 L75 85 L84 95 M66 165 L75 175 L84 165" fill="none" stroke="#102b46" stroke-width="3"/>
+<text x="48" y="214" font-size="13" fill="#102b46">Objek</text><text x="477" y="225" font-size="13" fill="#16845b">Retina</text>
+</svg></div>
+<div class="readout">
+<div class="metric"><small>Fokus model</small><strong id="focusMetric">16,7 mm</strong></div>
+<div class="metric"><small>Posisi retina (model)</small><strong>17 mm</strong></div>
+<div class="metric"><small>Hasil</small><strong id="focusStatus">Hampir fokus</strong></div>
+</div>
+<div class="note" id="simExplanation">Pada mata nyata, kornea dan lensa bekerja sebagai satu sistem optik. Mata mengubah daya lensa untuk memfokuskan bayangan pada retina.</div>
+</section>
+<section class="card span5" id="akomodasi">
+<div class="eyebrow2">03 • Fokus dekat dan jauh</div><h2>Akomodasi mata</h2>
+<p><b>Melihat jauh:</b> otot siliaris relatif relaks, zonula lebih tegang, lensa lebih pipih, daya optik lebih kecil.</p>
+<p><b>Melihat dekat:</b> otot siliaris berkontraksi, tegangan zonula berkurang, lensa lebih cembung, daya optik meningkat.</p>
+<div class="sim"><svg viewBox="0 0 420 170" role="img" aria-label="Perbandingan lensa pipih dan cembung"><rect x="5" y="5" width="410" height="160" rx="12" fill="#fff"/><path d="M120 35 Q145 85 120 135 Q95 85 120 35Z" fill="#b6e5fa" stroke="#1677b8" stroke-width="2"/><path d="M300 25 Q350 85 300 145 Q250 85 300 25Z" fill="#b6e5fa" stroke="#1677b8" stroke-width="2"/><text x="62" y="155" font-size="13" fill="#102b46">Jauh: lebih pipih</text><text x="235" y="155" font-size="13" fill="#102b46">Dekat: lebih cembung</text></svg></div>
+<div class="note success">Retina berada pada jarak yang hampir tetap dari sistem lensa. Akomodasi mengubah daya optik agar bayangan tetap terfokus di retina.</div>
+</section>
+<section class="card span12" id="kelainan">
+<div class="eyebrow2">04 • Ketika fokus tidak tepat</div><h2>Kelainan refraksi dan koreksi optiknya</h2>
+<div class="disease-grid">
+<div class="disease"><div class="tag">MIOPIA • RABUN JAUH</div><h3>Fokus di depan retina</h3><p>Objek jauh tampak kabur. Umumnya dikoreksi dengan lensa divergen (cekung, daya negatif) yang mengurangi konvergensi berkas cahaya sebelum masuk mata.</p></div>
+<div class="disease"><div class="tag">HIPERMETROPIA • RABUN DEKAT</div><h3>Fokus cenderung di belakang retina</h3><p>Objek dekat sulit difokuskan. Dikoreksi dengan lensa konvergen (cembung, daya positif) untuk menambah konvergensi cahaya.</p></div>
+<div class="disease"><div class="tag">ASTIGMATISME</div><h3>Daya optik berbeda menurut meridian</h3><p>Kelengkungan kornea atau lensa tidak sama ke semua arah sehingga cahaya tidak terfokus pada satu titik. Koreksi dapat memakai lensa silindris sesuai pemeriksaan.</p></div>
+<div class="disease"><div class="tag">PRESBIOPIA</div><h3>Akomodasi berkurang seiring usia</h3><p>Lensa makin kaku sehingga melihat dekat menjadi lebih sulit. Bantuan lensa plus untuk dekat dapat diresepkan setelah pemeriksaan.</p></div>
+</div>
+<div class="note">Media ini untuk pembelajaran, bukan untuk menentukan resep kacamata. Keluhan penglihatan perlu dinilai oleh tenaga kesehatan mata.</div>
+</section>
+<section class="card span12" id="kuis">
+<div class="eyebrow2">05 • Uji pemahaman</div><h2>Kuis interaktif</h2><p>Pilih satu jawaban untuk setiap soal, lalu tekan “Periksa jawaban”.</p>
+<form id="quiz">
+<div class="quiz-q"><p>1. Di bagian manakah bayangan nyata terbentuk pada mata?</p><label><input type="radio" name="q1" value="a"> Kornea</label><label><input type="radio" name="q1" value="b"> Retina</label><label><input type="radio" name="q1" value="c"> Iris</label></div>
+<div class="quiz-q"><p>2. Apa fungsi utama iris?</p><label><input type="radio" name="q2" value="a"> Mengubah cahaya menjadi sinyal listrik</label><label><input type="radio" name="q2" value="b"> Membawa sinyal ke otak</label><label><input type="radio" name="q2" value="c"> Mengatur ukuran pupil</label></div>
+<div class="quiz-q"><p>3. Saat melihat objek dekat, lensa mata normal menjadi ...</p><label><input type="radio" name="q3" value="a"> Lebih cembung dan daya optiknya meningkat</label><label><input type="radio" name="q3" value="b"> Lebih pipih dan daya optiknya menurun</label><label><input type="radio" name="q3" value="c"> Tidak berubah sama sekali</label></div>
+<div class="quiz-q"><p>4. Lensa yang umumnya digunakan untuk mengoreksi miopia adalah ...</p><label><input type="radio" name="q4" value="a"> Konvergen/cekung</label><label><input type="radio" name="q4" value="b"> Divergen/cekung</label><label><input type="radio" name="q4" value="c"> Cembung kuat untuk semua kasus</label></div>
+<div class="quiz-q"><p>5. Sel fotoreseptor retina mengubah cahaya menjadi ...</p><label><input type="radio" name="q5" value="a"> Gelombang suara</label><label><input type="radio" name="q5" value="b"> Gerak otot</label><label><input type="radio" name="q5" value="c"> Sinyal listrik/saraf</label></div>
+<button type="submit">Periksa jawaban</button> <button class="secondary" type="reset">Ulangi kuis</button><div id="quizResult" class="result" aria-live="polite"></div>
+</form>
+</section>
+<section class="card span12" id="poster">
+<div class="eyebrow2">Poster edukasi • Ringkasan siap tata letak</div>
+<h2>Sistem Penglihatan Manusia: Bagaimana Cahaya Membuat Kita Melihat?</h2>
+<p><b>Alur cahaya:</b> objek → kornea → pupil → lensa → retina → saraf optik → otak.</p>
+<p><b>Konsep fisika:</b> pembiasan cahaya, daya optik, pembentukan bayangan nyata-terbalik-diperkecil pada retina, dan akomodasi lensa.</p>
+<p><b>Kelainan refraksi:</b> miopia umumnya dikoreksi dengan lensa divergen; hipermetropia dengan lensa konvergen; astigmatisme dengan koreksi sesuai meridian; presbiopia berkaitan dengan berkurangnya akomodasi.</p>
+<p><b>Disusun oleh:</b> Siti Aisyah Ayuwistira; Muhammad Fauzan Azhar Nasution; Aprilia Dwi Lestari.</p>
+<div class="note">QR code perlu dibuat dari URL Google Sites setelah situs dipublikasikan. Jangan memakai QR code sebelum tautan akhir tersedia.</div>
+</section>
+<section class="card span12" id="referensi">
+<div class="eyebrow2">06 • Bacaan ilmiah</div><h2>Referensi</h2>
+<ol class="refs">
+<li>OpenStax. (2022). <i>College Physics 2e: 26.1 Physics of the Eye.</i> <a href="https://openstax.org/books/college-physics-2e/pages/26-1-physics-of-the-eye" target="_blank" rel="noopener">Baca sumber</a>.</li>
+<li>OpenStax. (2022). <i>College Physics 2e: 26.2 Vision Correction.</i> <a href="https://openstax.org/books/college-physics-2e/pages/26-2-vision-correction" target="_blank" rel="noopener">Baca sumber</a>.</li>
+<li>OpenStax. (2022). <i>Physics: 16.3 Lenses.</i> <a href="https://openstax.org/books/physics/pages/16-3-lenses" target="_blank" rel="noopener">Baca sumber</a>.</li>
+<li>National Eye Institute. (2022). <i>How the Eyes Work.</i> <a href="https://www.nei.nih.gov/learn-about-eye-health/healthy-vision/how-eyes-work" target="_blank" rel="noopener">Baca sumber</a>.</li>
+<li>National Eye Institute. (2025). <i>Types of Refractive Errors.</i> <a href="https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/refractive-errors/types-refractive-errors" target="_blank" rel="noopener">Baca sumber</a>.</li>
+<li>OpenStax. (2022). <i>University Physics Volume 3: 2.5 The Eye.</i> <a href="https://openstax.org/books/university-physics-volume-3/pages/2-5-the-eye" target="_blank" rel="noopener">Baca sumber</a>.</li>
+</ol>
+<p class="muted">Situs ini merupakan media pembelajaran mahasiswa. Tambahkan nama penyusun, kelas, program studi, dan dosen pengampu sebelum dipublikasikan.</p>
+</section>
+</div>
+</main>
+<footer>MATA OPTIKA LAB • Disusun oleh Siti Aisyah Ayuwistira, Muhammad Fauzan Azhar Nasution, dan Aprilia Dwi Lestari • Belajar sistem penglihatan melalui integrasi Biologi dan Fisika</footer>
+<script>
+const dist=document.getElementById('distance'), pow=document.getElementById('power');
+const fmt=(n,d=1)=>n.toLocaleString('id-ID',{maximumFractionDigits:d,minimumFractionDigits:0});
+function updateSim(){
+ const doCm=Number(dist.value), P=Number(pow.value), doM=doCm/100;
+ // Thin-lens model: 1/f = 1/do + 1/di; use di in meters. Simplified equivalent lens, schematic only.
+ const invDi=P-1/doM;
+ const di=invDi>0?1/invDi:Infinity;
+ document.getElementById('distanceValue').textContent=doCm+' cm';
+ document.getElementById('powerValue').textContent='+'+fmt(P,1)+' D';
+ const fmm=1000/P;
+ document.getElementById('focusMetric').textContent=Number.isFinite(di)?fmt(di*1000,1)+' mm':'Tak terhingga';
+ const diff=Number.isFinite(di)?(di-0.017):Infinity;
+ let status, explanation;
+ if(!Number.isFinite(di)){status='Tidak fokus';explanation='Pada model lensa tipis, kombinasi ini tidak menghasilkan fokus nyata pada jarak positif. Ubah daya optik atau jarak objek.'}
+ else if(Math.abs(diff)<0.0015){status='Dekat retina';explanation='Fokus model berada dekat bidang retina (17 mm). Model lensa tipis ini disederhanakan; mata nyata memiliki beberapa permukaan pembiasan.'}
+ else if(diff<0){status='Di depan retina';explanation='Fokus model berada di depan bidang retina. Pada mata nyata, kondisi mirip ini dapat menggambarkan kecenderungan miopia; koreksi optik perlu ditentukan melalui pemeriksaan.'}
+ else {status='Di belakang retina';explanation='Fokus model berada di belakang bidang retina. Pada mata nyata, kondisi mirip ini dapat menggambarkan kecenderungan hipermetropia; koreksi optik perlu ditentukan melalui pemeriksaan.'}
+ document.getElementById('focusStatus').textContent=status;
+ document.getElementById('simExplanation').textContent=explanation;
+ const xFocus=Number.isFinite(di)?Math.max(90,Math.min(650,410+(di-0.017)*9000)):650;
+ const yTop=72,yBot=188;
+ document.getElementById('ray1').setAttribute('d',`M75 ${yTop} L410 ${yTop} L${xFocus} 130`);
+ document.getElementById('ray2').setAttribute('d',`M75 ${yBot} L410 ${yBot} L${xFocus} 130`);
+ document.getElementById('ray3').setAttribute('d',`M75 130 L410 130 L${xFocus} 130`);
+}
+dist.addEventListener('input',updateSim);pow.addEventListener('input',updateSim);updateSim();
+document.getElementById('quiz').addEventListener('submit',e=>{e.preventDefault();const answers={q1:'b',q2:'c',q3:'a',q4:'b',q5:'c'};let score=0;for(const [q,a] of Object.entries(answers)){const chosen=document.querySelector(`input[name="${q}"]:checked`);if(chosen&&chosen.value===a)score++}document.getElementById('quizResult').textContent=`Skor kamu: ${score}/5. ${score===5?'Hebat! Semua jawaban benar.':'Baca kembali bagian materi, lalu coba lagi.'}`;});
+document.getElementById('quiz').addEventListener('reset',()=>{document.getElementById('quizResult').textContent='';});
+</script>
+</body></html>
